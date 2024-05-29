@@ -1,0 +1,53 @@
+﻿@model List<TradexSample.Models.Domain.BlogPost>
+
+<div class="bg-secondary bg-opacity-10 py-2">
+    <div class="container">
+        <h1>List of BlogPost-Admin</h1>
+    </div>
+</div>
+
+<div class="container" py-5>
+
+    @if (Model != null && Model.Any())
+    {
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <td>Id</td>
+                    <td>Heading</td>
+                    <td>Tags</td>
+                    <td></td>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var blogpost in Model)
+                {
+                    <tr>
+                        <td>@blogpost.Id</td>
+                        <td>@blogpost.Heading</td>
+                        <td>
+                            <div class="d-flex">
+                                @foreach (var item in blogpost.Tags)
+                                {
+                                    <span class="badge bg-secondary me-1">@item.Name</span>
+                                }
+                            </div>
+                        </td>
+                        <td>
+                            <a asp-controller="AdminBlogPost" asp-action="Edit" asp-route-id="@blogpost.Id">Edit</a>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+
+
+        </table>
+    }
+
+    else
+    {
+        <p>No Blog post found</p>
+    }
+
+
+</div>
